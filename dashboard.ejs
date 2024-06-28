@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e9ecef;
+            color: #343a40;
+        }
+
+        header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
+
+        main {
+            margin: 2rem auto;
+            padding: 0 2rem;
+            max-width: 800px;
+        }
+
+        section {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            padding: 2rem;
+        }
+
+        h2 {
+            color: #007bff;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        form label {
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #495057;
+        }
+
+        form input[type="text"] {
+            padding: 0.75rem;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+        }
+
+        form button {
+            background-color: #007bff;
+            color: white;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+
+        form button:hover {
+            background-color: #0056b3;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        ul li strong {
+            font-weight: bold;
+        }
+
+        p.error {
+            color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome, <%= username %>!</h1>
+    </header>
+    <main>
+        <section>
+            <h2>Search for an Animal to know it's Scientific Name</h2>
+            <form action="/search?username=<%= username %>" method="POST">
+                <label for="animalName">Animal Name:</label>
+                <input type="text" id="animalName" name="animalName" required>
+                <button type="submit">Search</button>
+            </form>
+            <% if (error) { %>
+                <p class="error"><%= error %></p>
+            <% } %>
+        </section>
+        <section>
+            <% if (animalData) { %>
+                <h2>Animal Information</h2>
+                <ul>
+                    <li><strong>Name:</strong> <%= animalData.name %></li>
+                    <li><strong>Scientific Name:</strong> <%= animalData.scientific_name %></li>
+                </ul>
+            <% } %>
+        </section>
+    </main>
+</body>
+</html>
